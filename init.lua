@@ -7,6 +7,7 @@ set.tabstop = 4
 set.shiftwidth = 4
 set.expandtab = true
 set.autoindent = true
+set.cursorline = true
 vim.bo.shiftwidth = 4
 vim.bo.tabstop = 4
 vim.g.mapleader = " " 
@@ -90,9 +91,24 @@ require("lazy").setup({
 				},
 			})
 		end,
-	}
+	},
+    {
+        "yamatsum/nvim-cursorline"
+    }
 })
 vim.cmd.colorscheme("base16-tokyo-night-storm")
+require('nvim-cursorline').setup {
+  cursorline = {
+    enable = true,
+    timeout = 10,
+    number = false,
+  },
+  cursorword = {
+    enable = true,
+    min_length = 3,
+    hl = { underline = true },
+  }
+}
 require("neodev").setup({
   -- add any options here, or leave empty to use the default settings
 })
