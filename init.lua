@@ -61,10 +61,38 @@ require("lazy").setup({
 	},
     {
         "folke/neodev.nvim",
-    }
+    },
+    {
+        cmd = "Telescope",
+		keys = {
+			{ "<leader>ff", ":Telescope find_files<CR>", desc = "find files" },
+			{ "<leader>fg", ":Telescope live_grep<CR>", desc = "grep file" },
+			{ "<leader>rs", ":Telescope resume<CR>", desc = "resume" },
+			{ "<C-q>", ":Telescope oldfiles<CR>", desc = "oldfiles" },
+		},
+        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
+    {
+		"nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						node_incremental = "v",
+						node_decremental = "<BS>",
+					},
+				},
+				highlight = {
+					enable = true,
+				},
+			})
+		end,
+	}
 })
 vim.cmd.colorscheme("base16-tokyo-night-storm")
-
 require("neodev").setup({
   -- add any options here, or leave empty to use the default settings
 })
@@ -76,6 +104,7 @@ require("lspconfig").pyright.setup({
 	capabilities = capabilities,
 })
 
+vim.keymap.set('n', '<space>o', ':E<CR>')
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
