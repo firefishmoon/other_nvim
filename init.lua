@@ -12,6 +12,12 @@ vim.bo.shiftwidth = 4
 vim.bo.tabstop = 4
 vim.g.mapleader = " " 
 
+local key_opt = {noremap = true, silent = false}
+
+vim.keymap.set('n', '<M-j>', '10j', key_opt)
+vim.keymap.set('n', '<M-k>', '10k', key_opt)
+vim.keymap.set('n', '<M-h>', '^', key_opt)
+vim.keymap.set('n', '<M-l>', '$', key_opt)
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -94,6 +100,16 @@ require("lazy").setup({
 	},
     {
         "yamatsum/nvim-cursorline"
+    },
+    {
+		"rcarriga/nvim-dap-ui",
+		dependencies = {
+            "rcarriga/nvim-dap-ui"
+		},
+	},
+    {
+        "mfussenegger/nvim-dap",
+        lazy = true
     }
 })
 vim.cmd.colorscheme("base16-tokyo-night-storm")
@@ -104,8 +120,7 @@ require('nvim-cursorline').setup {
     number = false,
   },
   cursorword = {
-    enable = true,
-    min_length = 3,
+    enable = true, min_length = 3,
     hl = { underline = true },
   }
 }
@@ -224,3 +239,5 @@ cmp.setup({
 		{ name = "buffer" },
 	}),
 })
+
+require('dap_debug')
